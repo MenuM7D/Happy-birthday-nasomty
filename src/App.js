@@ -593,13 +593,57 @@ function FinalPage() {
 // مكون لصفحة الرسالة النهائية مع زر الوعد
 function InfinitePage() {
   const [showPromiseResponse, setShowPromiseResponse] = useState(false);
+  const [showVoiceMessage, setShowVoiceMessage] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef(null);
 
   const handlePromiseClick = () => {
     setShowPromiseResponse(true);
-    // الانتقال إلى واتساب بعد 3 ثواني
+    // عرض واجهة التسجيل الصوتي بعد 3 ثواني
     setTimeout(() => {
-      window.location.href = 'https://wa.me/201220864180';
+      setShowPromiseResponse(false);
+      setShowVoiceMessage(true);
     }, 3000);
+  };
+
+  const togglePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration);
+    }
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleFinalButton = () => {
+    window.location.href = 'https://wa.me/201220864180?text=بحبك+يا+بابا❤️✨';
   };
 
   return (
@@ -625,6 +669,94 @@ function InfinitePage() {
               وانا كمان بوعدك مستحيل ابعد عنك ابداً ياتي
             </div>
             <div className="promise-hearts">💕❤️💕</div>
+          </div>
+        </div>
+      )}
+
+      {showVoiceMessage && (
+        <div className="voice-message-overlay">
+          {/* العناصر الرومانسية المتساقطة */}
+          <div className="romantic-falling-elements">
+            {[...Array(30)].map((_, i) => (
+              <div 
+                key={i} 
+                className="falling-element"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${4 + Math.random() * 4}s`,
+                  fontSize: `${12 + Math.random() * 16}px`
+                }}
+              >
+                {['💕', '❤️', '💖', '✨', '💗', '🌸', '💝', '🌹'][Math.floor(Math.random() * 8)]}
+              </div>
+            ))}
+          </div>
+
+          <div className="voice-message-container">
+            {/* الرسالة الرومانسية */}
+            <div className="voice-message-header">
+              <span className="header-emoji">🎧</span>
+              <p className="voice-instruction">
+                البسي سماعة لو معاكي يا عمري واسمعيه او وطي الصوت واسمعي وانتي مش جمبك حد يا حياتي بحبك اوي امواححححححح ياتي
+              </p>
+              <span className="header-emoji">💕</span>
+            </div>
+
+            {/* مشغل التسجيل الصوتي */}
+            <div className="voice-player">
+              <audio 
+                ref={audioRef}
+                src="https://files.catbox.moe/aumdtw.opus"
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={handleLoadedMetadata}
+                onEnded={handleEnded}
+                preload="metadata"
+              />
+              
+              <div className="voice-player-inner">
+                {/* زر التشغيل/الإيقاف */}
+                <button className="play-pause-btn" onClick={togglePlayPause}>
+                  {isPlaying ? (
+                    <span className="pause-icon">⏸️</span>
+                  ) : (
+                    <span className="play-icon">▶️</span>
+                  )}
+                </button>
+
+                {/* شريط التقدم والموجات الصوتية */}
+                <div className="voice-wave-container">
+                  <div className="voice-waves">
+                    {[...Array(30)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className={`wave-bar ${isPlaying ? 'animating' : ''}`}
+                        style={{
+                          height: `${10 + Math.random() * 25}px`,
+                          animationDelay: `${i * 0.05}s`
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div 
+                    className="voice-progress" 
+                    style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
+                  />
+                </div>
+
+                {/* الوقت */}
+                <div className="voice-time">
+                  <span>{formatTime(currentTime)}</span>
+                  <span>/</span>
+                  <span>{formatTime(duration)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* زر الانتقال للواتساب */}
+            <button className="voice-final-btn" onClick={handleFinalButton}>
+              💕 لو سمعتي الريك وبتحبيني اوي اوي دوسي هنا 💕
+            </button>
           </div>
         </div>
       )}

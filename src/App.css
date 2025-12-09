@@ -2078,3 +2078,357 @@ body {
     font-size: clamp(16px, 3.5vw, 20px);
   }
 }
+
+/* =============================================
+   VOICE MESSAGE SECTION - واجهة التسجيل الصوتي
+============================================= */
+.voice-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, 
+    #1a0f14 0%, 
+    #2d1520 20%,
+    #3d1a2a 40%,
+    #4d1f34 60%,
+    #5d2440 80%,
+    #6d294a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 20px;
+  animation: voiceOverlayFadeIn 0.8s ease-out;
+  overflow: hidden;
+}
+
+@keyframes voiceOverlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* العناصر الرومانسية المتساقطة */
+.romantic-falling-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.falling-element {
+  position: absolute;
+  top: -30px;
+  animation: romanticFall linear infinite;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.5));
+}
+
+@keyframes romanticFall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* حاوية الرسالة الصوتية */
+.voice-message-container {
+  background: linear-gradient(135deg, 
+    rgba(255, 182, 193, 0.95) 0%, 
+    rgba(255, 105, 180, 0.9) 50%, 
+    rgba(219, 112, 147, 0.95) 100%);
+  border-radius: 40px;
+  padding: clamp(30px, 6vw, 50px);
+  max-width: 550px;
+  width: 100%;
+  box-shadow: 
+    0 25px 80px rgba(255, 105, 180, 0.4),
+    0 0 100px rgba(255, 182, 193, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 10px rgba(139, 69, 97, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  animation: voiceContainerAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes voiceContainerAppear {
+  from { 
+    opacity: 0; 
+    transform: scale(0.7) translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+/* رأس الرسالة الصوتية */
+.voice-message-header {
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.header-emoji {
+  font-size: clamp(30px, 7vw, 45px);
+  animation: emojiPulse 2s ease-in-out infinite;
+}
+
+@keyframes emojiPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.voice-instruction {
+  font-size: clamp(15px, 3.5vw, 20px);
+  color: #4a1a2a;
+  font-weight: 600;
+  line-height: 1.8;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+  max-width: 400px;
+}
+
+/* مشغل التسجيل الصوتي - تصميم واتساب */
+.voice-player {
+  background: linear-gradient(135deg, 
+    #1f1f2e 0%, 
+    #2a2a3d 50%, 
+    #1f1f2e 100%);
+  border-radius: 30px;
+  padding: clamp(15px, 3.5vw, 25px);
+  margin-bottom: 30px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    0 0 30px rgba(255, 105, 180, 0.2);
+  border: 2px solid rgba(255, 105, 180, 0.3);
+}
+
+.voice-player-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vw, 20px);
+}
+
+/* زر التشغيل/الإيقاف */
+.play-pause-btn {
+  width: clamp(50px, 12vw, 70px);
+  height: clamp(50px, 12vw, 70px);
+  border-radius: 50%;
+  background: linear-gradient(135deg, 
+    #ff69b4 0%, 
+    #ff1493 50%, 
+    #db7093 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 8px 25px rgba(255, 105, 180, 0.5),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 12px 35px rgba(255, 105, 180, 0.7),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.play-pause-btn:active {
+  transform: scale(0.95);
+}
+
+.play-icon, .pause-icon {
+  font-size: clamp(22px, 5vw, 32px);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* حاوية الموجات الصوتية */
+.voice-wave-container {
+  flex: 1;
+  height: clamp(40px, 10vw, 60px);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(255, 105, 180, 0.1);
+}
+
+.voice-waves {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 3px;
+  padding: 0 10px;
+}
+
+.wave-bar {
+  width: 4px;
+  background: linear-gradient(to top, 
+    #ff69b4 0%, 
+    #ff1493 50%, 
+    #ffb6c1 100%);
+  border-radius: 4px;
+  transition: height 0.1s ease;
+  opacity: 0.6;
+}
+
+.wave-bar.animating {
+  animation: waveAnimation 0.8s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes waveAnimation {
+  0%, 100% { 
+    transform: scaleY(0.4); 
+    opacity: 0.6;
+  }
+  50% { 
+    transform: scaleY(1); 
+    opacity: 1;
+  }
+}
+
+/* شريط التقدم */
+.voice-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    #ff69b4 0%, 
+    #ff1493 50%, 
+    #ff69b4 100%);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+/* الوقت */
+.voice-time {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #ffb6c1;
+  font-size: clamp(12px, 3vw, 16px);
+  font-weight: 600;
+  font-family: 'Segoe UI', monospace;
+  flex-shrink: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* زر الانتقال النهائي */
+.voice-final-btn {
+  background: linear-gradient(135deg, 
+    #8b0a50 0%, 
+    #c71585 50%, 
+    #db7093 100%);
+  color: white;
+  border: none;
+  padding: clamp(16px, 4vw, 22px) clamp(25px, 5vw, 40px);
+  font-size: clamp(14px, 3.5vw, 19px);
+  border-radius: 50px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  box-shadow: 
+    0 10px 40px rgba(199, 21, 133, 0.5),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-final-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
+}
+
+.voice-final-btn:hover::before {
+  left: 100%;
+}
+
+.voice-final-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 15px 50px rgba(199, 21, 133, 0.7),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.voice-final-btn:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* =============================================
+   VOICE MESSAGE RESPONSIVE
+============================================= */
+@media (max-width: 480px) {
+  .voice-message-container {
+    padding: clamp(20px, 5vw, 35px);
+    border-radius: 30px;
+  }
+  
+  .voice-instruction {
+    font-size: clamp(13px, 3.2vw, 16px);
+  }
+  
+  .voice-player {
+    padding: clamp(12px, 3vw, 20px);
+    border-radius: 25px;
+  }
+  
+  .play-pause-btn {
+    width: clamp(45px, 11vw, 60px);
+    height: clamp(45px, 11vw, 60px);
+  }
+  
+  .voice-wave-container {
+    height: clamp(35px, 9vw, 50px);
+  }
+  
+  .wave-bar {
+    width: 3px;
+  }
+  
+  .voice-final-btn {
+    padding: clamp(14px, 3.5vw, 18px) clamp(20px, 4vw, 30px);
+    font-size: clamp(12px, 3vw, 16px);
+  }
+  
+  .header-emoji {
+    font-size: clamp(25px, 6vw, 35px);
+  }
+}
