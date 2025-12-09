@@ -294,7 +294,7 @@ function TreasurePage() {
               {nestingLevel === 23 && '💕'}
   
             </div>
-            {!showHeartPrompt && <p className="instruction">دوسي علي كل القلوب يا قمري 💖</p>}
+            {!showHeartPrompt && <p className="instruction">دوسي علي اي قلب هيظهر يا قمري 💖</p>}
           </div>
         )}
 
