@@ -435,7 +435,7 @@ function PhotosPage() {
     "https://i.postimg.cc/jSSC7LyZ/file.jpg",
     "https://i.postimg.cc/rwwzrK5f/file.jpg",
     "https://i.postimg.cc/wjj3m7Db/file.jpg",
-    "https://i.postimg.cc/Z550dC6g/file.jpg",
+    "https://i.postimg.cc/cJ6KVrHX/file.jpg",
     "https://i.postimg.cc/T33hDpnz/file.jpg"
   ];
 
