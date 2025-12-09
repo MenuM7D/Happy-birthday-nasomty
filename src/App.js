@@ -314,7 +314,7 @@ function RedHeartsPage() {
               className="rain-heart"
               style={{
                 left: `${Math.random() * 100}%`,
-                aniت Delay: `${Math.random() * 5}s`,
+                animationDelay: `${Math.random() * 5}s`,
                 animationDuration: `${4 + Math.random() * 4}s`
               }}
             >
