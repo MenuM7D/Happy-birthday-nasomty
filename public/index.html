@@ -2,7 +2,8 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
+    <!-- Romantic Heart Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='heartGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23e8b4b8'/><stop offset='50%25' style='stop-color:%23c77a88'/><stop offset='100%25' style='stop-color:%239b5f6c'/></linearGradient></defs><text y='.9em' font-size='90' fill='url(%23heartGrad)'>💕</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <!-- Primary Meta Tags -->
@@ -11,7 +12,7 @@
     <meta name="description" content="كل سنه وانتي طيبه يا نسومتي 💕 مفاجأة عيد ميلاد رومانسية مليئة بالحب والعشق والدلع ✨ موقع خاص مصمم بكل حب لأغلى وأجمل بنت في الدنيا 💖" />
     <meta name="keywords" content="عيد ميلاد, نسومتي, حب, رومانسية, مفاجأة, happy birthday" />
     <meta name="author" content="Your Love ❤️" />
-    <meta name="theme-color" content="#f5576c" />
+    <meta name="theme-color" content="#c77a88" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -42,19 +43,24 @@
     <!-- PWA -->
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
     <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://i.postimg.cc" />
+    <link rel="preconnect" href="https://files.catbox.moe" />
+    
+    <!-- Romantic Color Scheme -->
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        background: linear-gradient(135deg, #ffeef2 0%, #f8e1e7 30%, #e8b4b8 70%, #c77a88 100%);
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

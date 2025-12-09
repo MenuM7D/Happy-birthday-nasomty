@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 
@@ -81,7 +81,7 @@ function BirthdayPage() {
         <div className="message-overlay fade-in">
           <div className="word-sequence">
             <div className="love-word word-1">احبك ❤️</div>
-            <div className="love-word word-2">اعشقك 💕</div>
+            <div className="love-word word-2">بعشقك 💕</div>
             <div className="love-word word-3">بدمنك 💖</div>
           </div>
           <div className="envelope-container appear-after-words">
@@ -120,16 +120,16 @@ function HeartsPage() {
   const navigate = useNavigate();
 
   const heartMessages = [
-    { text: "بحبك", emoji: "❤️✨", color: "#ff6b9d" },
-    { text: "بعشقك", emoji: "❤️✨", color: "#c44569" },
-    { text: "بدمنك", emoji: "❤️✨", color: "#f093fb" },
-    { text: "ربنا يخليكي ليا", emoji: "💞✨", color: "#fa709a" },
-    { text: "هابي بيرز داي يا عمري", emoji: "💕✨", color: "#ff6348" },
-    { text: "امممممممممم امواححححححح", emoji: "💞✨", color: "#ff4757" },
-    { text: "اي لوف يو وكدا", emoji: "❤️✨", color: "#ee5a6f" },
-    { text: "هنجيب زين امتي بقا", emoji: "❤️✨", color: "#c44569" },
-    { text: "اموت انا في مراتي وانا بفاجئها بحبك يا بت", emoji: "💕✨", color: "#f5576c" },
-    { text: "احلي ماما ربنا يخليكي ليا", emoji: "💕✨", color: "#ff6b9d" }
+    { text: "بحبك", emoji: "❤️✨", color: "#c77a88" },
+    { text: "بعشقك", emoji: "❤️✨", color: "#9b5f6c" },
+    { text: "بدمنك", emoji: "❤️✨", color: "#d4a5a5" },
+    { text: "ربنا يخليكي ليا", emoji: "💞✨", color: "#a5697a" },
+    { text: "هابي بيرز داي يا عمري", emoji: "💕✨", color: "#e8b4b8" },
+    { text: "امممممممممم امواححححححح", emoji: "💞✨", color: "#c77a88" },
+    { text: "اي لوف يو وكدا", emoji: "❤️✨", color: "#9b5f6c" },
+    { text: "هنجيب زين امتي بقا", emoji: "❤️✨", color: "#d4a5a5" },
+    { text: "اموت انا في مراتي وانا بفاجئها بحبك يا بت", emoji: "💕✨", color: "#a5697a" },
+    { text: "احلي ماما ربنا يخليكي ليا", emoji: "💕✨", color: "#e8b4b8" }
   ];
 
   const handleHeartClick = (index) => {
@@ -186,9 +186,7 @@ function HeartsPage() {
             </div>
           ))}
         </div>
-        <div className="hearts-counter">
-          <p>{openedHearts.length} / 10 قلوب 💕</p>
-        </div>
+        {/* تم إخفاء عداد القلوب */}
       </div>
     </div>
   );
@@ -282,7 +280,7 @@ function RedHeartsPage() {
               style={{
                 left: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 3}s`
+                animationDuration: `${4 + Math.random() * 4}s`
               }}
             >
               ❤️
@@ -305,9 +303,11 @@ function RedHeartsPage() {
   );
 }
 
-// مكون لصفحة معرض الصور
+// مكون لصفحة معرض الصور مع موسيقى عيد الميلاد
 function PhotosPage() {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const audioRef = useRef(null);
+  const [audioStarted, setAudioStarted] = useState(false);
   const navigate = useNavigate();
 
   const photos = [
@@ -324,6 +324,39 @@ function PhotosPage() {
     "https://i.postimg.cc/kGPZ8PST/file.jpg"
   ];
 
+  // تشغيل الموسيقى عند تحميل الصفحة
+  useEffect(() => {
+    if (!audioStarted && audioRef.current) {
+      const playAudio = () => {
+        audioRef.current.volume = 0.6;
+        audioRef.current.play().catch(e => {
+          console.log('Auto-play blocked, waiting for user interaction');
+        });
+        setAudioStarted(true);
+      };
+      
+      // محاولة التشغيل التلقائي
+      playAudio();
+      
+      // إضافة مستمع للتفاعل إذا فشل التشغيل التلقائي
+      const handleInteraction = () => {
+        if (audioRef.current && !audioStarted) {
+          playAudio();
+        }
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+      };
+      
+      document.addEventListener('click', handleInteraction);
+      document.addEventListener('touchstart', handleInteraction);
+      
+      return () => {
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+      };
+    }
+  }, [audioStarted]);
+
   useEffect(() => {
     if (currentPhotoIndex < photos.length - 1) {
       const timer = setTimeout(() => {
@@ -334,11 +367,23 @@ function PhotosPage() {
   }, [currentPhotoIndex, photos.length]);
 
   const handlePhotosComplete = () => {
+    // إيقاف الموسيقى عند الانتقال
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
     navigate('/final');
   };
 
   return (
     <div className="stage stage-5">
+      {/* عنصر الصوت */}
+      <audio 
+        ref={audioRef} 
+        src="https://files.catbox.moe/dyhhld.mp3" 
+        loop
+        preload="auto"
+      />
+      
       <div className="photo-gallery">
         <div className="cinema-frame">
           {photos.slice(0, currentPhotoIndex + 1).map((photo, index) => (
@@ -353,9 +398,7 @@ function PhotosPage() {
             />
           ))}
         </div>
-        <div className="photo-counter">
-          <p>{currentPhotoIndex + 1} / {photos.length} 📸</p>
-        </div>
+        {/* تم إخفاء عداد الصور */}
         {currentPhotoIndex === photos.length - 1 && (
           <button className="continue-button fade-in" onClick={handlePhotosComplete}>
             دوسي هنا لسه في كمان 💕
@@ -390,54 +433,44 @@ function FinalPage() {
   );
 }
 
-// مكون لصفحة الرسائل اللانهائية - تم إصلاحه
+// مكون لصفحة الرسالة النهائية مع زر الوعد
 function InfinitePage() {
-  const [messages, setMessages] = useState([]);
+  const [showPromiseResponse, setShowPromiseResponse] = useState(false);
 
-  useEffect(() => {
-    // إضافة رسائل تدريجياً
-    const interval = setInterval(() => {
-      setMessages(prev => {
-        if (prev.length < 100) {
-          return [...prev, {
-            id: prev.length,
-            text: "بحبك ❤️",
-            top: Math.random() * 90,
-            left: Math.random() * 90,
-            delay: Math.random() * 2,
-            size: 14 + Math.random() * 20,
-            duration: 3 + Math.random() * 3
-          }];
-        }
-        return prev;
-      });
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, []);
+  const handlePromiseClick = () => {
+    setShowPromiseResponse(true);
+    // الانتقال إلى واتساب بعد 3 ثواني
+    setTimeout(() => {
+      window.location.href = 'https://wa.me/201220864180';
+    }, 3000);
+  };
 
   return (
     <div className="stage stage-7">
       <div className="infinite-love">
-        <div className="infinite-overlay">
-          <h1 className="infinite-title">بحبك للأبد 💕✨</h1>
-        </div>
-        {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className="love-message"
-            style={{
-              top: `${msg.top}%`,
-              left: `${msg.left}%`,
-              animationDelay: `${msg.delay}s`,
-              fontSize: `${msg.size}px`,
-              animationDuration: `${msg.duration}s`
-            }}
-          >
-            {msg.text}
+        <div className="final-message-container">
+          <div className="final-love-card">
+            <div className="final-love-header">💕 رسالة ليكي يا بنوتي 💕</div>
+            <div className="final-love-text">
+              عايزك تعرفي اني مستحيل استغني عنك ومستحيل اقدر اعيش من غير يا نسومتي انتي كل حاجه بلنسبه ليا انتي ماما وانتي حبيبتي وانتي قلبي وانتي صحبتي وانتي بنتي وانتي تربيتي انتي كل حاجه ليا يا بنوتي لو هستغني عن الكون دا كلو بحالو مستحيل استغني عنك لحظه يا بنوتي انتي عشقي بحبككككك اوي اوي اوي يا كل ما ليا وعد متبعدين عني ابدا ابدا ابدا 
+            </div>
+            <button className="promise-button" onClick={handlePromiseClick}>
+              وعد 💕
+            </button>
           </div>
-        ))}
+        </div>
       </div>
+
+      {showPromiseResponse && (
+        <div className="promise-overlay">
+          <div className="promise-response-card">
+            <div className="promise-response-text">
+              وانا كمان بوعدك مستحيل ابعد عنك ابدا
+            </div>
+            <div className="promise-hearts">💕❤️💕</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
