@@ -123,16 +123,16 @@ function HeartsPage() {
   const navigate = useNavigate();
 
   const heartMessages = [
-    { text: "بحبك", emoji: "❤️", color: "#ff6b8a", bgGradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" },
-    { text: "بعشقك", emoji: "💕", color: "#e91e63", bgGradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" },
-    { text: "بدمنك", emoji: "💖", color: "#9c27b0", bgGradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)" },
-    { text: "ربنا يخليكي ليا", emoji: "💞", color: "#e040fb", bgGradient: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)" },
-    { text: "هابي بيرز داي يا عمري", emoji: "🎂", color: "#ff4081", bgGradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)" },
-    { text: "امممممممممم امواححححححح", emoji: "😘", color: "#f50057", bgGradient: "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)" },
-    { text: "اي لوف يو وكدا", emoji: "💋", color: "#c2185b", bgGradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)" },
-    { text: "هنجيب زين امتي بقا", emoji: "👶", color: "#ad1457", bgGradient: "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)" },
-    { text: "اموت انا في مراتي وانا بفاجئها بحبك يا بت", emoji: "💑", color: "#880e4f", bgGradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)" },
-    { text: "احلي ماما ربنا يخليكي ليا", emoji: "❤️‍🔥", color: "#d50000", bgGradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)" }
+    { text: "بحبك ياتي اسف انو هيبقا جاي متاخر شويه بس والله غصب عني", emoji: "❤️", color: "#ff6b8a", bgGradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" },
+    { text: "بعشقك يا بنوتي يارب تكوني مبسوطه بلمفاجئه", emoji: "💕", color: "#e91e63", bgGradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" },
+    { text: "بدمنك يا ماما ابقي جيبي بوسه اول متفتحي تكلميني بعد اذنك", emoji: "💖", color: "#9c27b0", bgGradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)" },
+    { text: "ربنا يخليكي ليا ياتي وميحرمنيش منك وتفضلي معايا طول العمر", emoji: "💞", color: "#e040fb", bgGradient: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)" },
+    { text: "هابي بيرز داي ياتي احلي من يتم ال19 اصلاً", emoji: "🎂", color: "#ff4081", bgGradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)" },
+    { text: "امممممممممم امواحححححححححححح من شفايفك الحلوين دول", emoji: "🫦", color: "#f50057", bgGradient: "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)" },
+    { text: "اي لوف يو وكدا يا قمري بحبك اوي اوي اوي", emoji: "💋", color: "#c2185b", bgGradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)" },
+    { text: "هنجيب زين امتي بقا الواد زهق ولسه مجبناهوش", emoji: "👶", color: "#ad1457", bgGradient: "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)" },
+    { text: "اموت انا في مراتي وانا بفاجئها بحبك ياتي زمانك كنتي فكراني نسيت بس ظلماني علفكره صلحيني بقا", emoji: "💑", color: "#880e4f", bgGradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)" },
+    { text: "دومتيلي زوجه وبنت واخت وحبيبه وصاحبه وكل حاجه يا ماما بعشقك اوعي تبعدي عني يوم", emoji: "❤️‍🔥", color: "#d50000", bgGradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)" }
   ];
 
   const handleHeartClick = () => {
@@ -270,9 +270,31 @@ function TreasurePage() {
               onClick={handleNestedHeartClick}
             >
               {nestingLevel === 1 && '❤️'}
-              {nestingLevel === 2 && '💕'}
+              {nestingLevel === 2 && '🤎'}
+              {nestingLevel === 3 && '💜'}
+              {nestingLevel === 4 && '💙'}
+              {nestingLevel === 5 && '🩵'}
+              {nestingLevel === 6 && '💚'}
+              {nestingLevel === 7 && '💛'}
+              {nestingLevel === 8 && '🧡'}
+              {nestingLevel === 9 && '💞'}
+              {nestingLevel === 10 && '💓'}
+              {nestingLevel === 11 && '💗'}
+              {nestingLevel === 12 && '💖'}
+              {nestingLevel === 13 && '💝'}
+              {nestingLevel === 14 && '💘'}
+              {nestingLevel === 15 && '🩷'}
+              {nestingLevel === 16 && '🤍'}
+              {nestingLevel === 17 && '🩶'}
+              {nestingLevel === 18 && '❤️‍🔥'}
+              {nestingLevel === 19 && '❤️‍🩹'}
+              {nestingLevel === 20 && '❣️'}
+              {nestingLevel === 21 && '♥️'}
+              {nestingLevel === 22 && '💟'}
+              {nestingLevel === 23 && '💕'}
+  
             </div>
-            {!showHeartPrompt && <p className="instruction">دوسي علي القلوب يا عمري 💖</p>}
+            {!showHeartPrompt && <p className="instruction">دوسي علي كل القلوب يا قمري 💖</p>}
           </div>
         )}
 
