@@ -622,7 +622,7 @@ function InfinitePage() {
         <div className="promise-overlay">
           <div className="promise-response-card">
             <div className="promise-response-text">
-              وانا كمان بوعدك مستحيل ابعد عنك ابدا
+              وانا كمان بوعدك مستحيل ابعد عنك ابداً ياتي
             </div>
             <div className="promise-hearts">💕❤️💕</div>
           </div>
