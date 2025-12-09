@@ -238,7 +238,7 @@ function TreasurePage() {
   const navigate = useNavigate();
 
   const handleNestedHeartClick = () => {
-    if (nestingLevel < 2) {
+    if (nestingLevel < 23) {
       setNestingLevel(nestingLevel + 1);
     } else {
       setShowMessage(true);
