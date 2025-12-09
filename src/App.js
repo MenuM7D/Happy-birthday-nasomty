@@ -27,7 +27,7 @@ function HomePage() {
           <div className="crystal-core">🔮</div>
           <div className="crystal-shine"></div>
         </div>
-        {!showMessage && <p className="instruction">اضغطي على البلورة السحرية ✨</p>}
+        {!showMessage && <p className="instruction">دوسي علي البلورة السحريه دي يا قمري ✨</p>}
       </div>
 
       {showMessage && (
@@ -80,14 +80,16 @@ function BirthdayPage() {
       {showMessage && (
         <div className="message-overlay fade-in">
           <div className="word-sequence">
-            <div className="love-word word-1">احبك ❤️</div>
+            <div className="love-word word-1">بحبك ❤️</div>
             <div className="love-word word-2">بعشقك 💕</div>
             <div className="love-word word-3">بدمنك 💖</div>
           </div>
           <div className="envelope-container appear-after-words">
             <div className="envelope" onClick={() => setShowMessage('letter')}>
               <div className="envelope-flap"></div>
-              <div className="envelope-body"></div>
+              <div className="envelope-body">
+                <div className="envelope-heart">💕</div>
+              </div>
               <p className="envelope-text">دوسي علي الظرف يا عمري 💌</p>
             </div>
           </div>
@@ -113,80 +115,116 @@ function BirthdayPage() {
   );
 }
 
-// مكون لصفحة القلوب مع تصميم رومانسي جديد
+// مكون لصفحة القلوب مع تصميم رومانسي جديد ومبتكر
 function HeartsPage() {
-  const [openedHearts, setOpenedHearts] = useState([]);
-  const [showHeartMessage, setShowHeartMessage] = useState(null);
+  const [currentHeartIndex, setCurrentHeartIndex] = useState(0);
+  const [showMessage, setShowMessage] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const navigate = useNavigate();
 
   const heartMessages = [
-    { text: "بحبك", emoji: "❤️✨", color: "#c77a88" },
-    { text: "بعشقك", emoji: "❤️✨", color: "#9b5f6c" },
-    { text: "بدمنك", emoji: "❤️✨", color: "#d4a5a5" },
-    { text: "ربنا يخليكي ليا", emoji: "💞✨", color: "#a5697a" },
-    { text: "هابي بيرز داي يا عمري", emoji: "💕✨", color: "#e8b4b8" },
-    { text: "امممممممممم امواححححححح", emoji: "💞✨", color: "#c77a88" },
-    { text: "اي لوف يو وكدا", emoji: "❤️✨", color: "#9b5f6c" },
-    { text: "هنجيب زين امتي بقا", emoji: "❤️✨", color: "#d4a5a5" },
-    { text: "اموت انا في مراتي وانا بفاجئها بحبك يا بت", emoji: "💕✨", color: "#a5697a" },
-    { text: "احلي ماما ربنا يخليكي ليا", emoji: "💕✨", color: "#e8b4b8" }
+    { text: "بحبك", emoji: "❤️", color: "#ff6b8a", bgGradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" },
+    { text: "بعشقك", emoji: "💕", color: "#e91e63", bgGradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" },
+    { text: "بدمنك", emoji: "💖", color: "#9c27b0", bgGradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)" },
+    { text: "ربنا يخليكي ليا", emoji: "💞", color: "#e040fb", bgGradient: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)" },
+    { text: "هابي بيرز داي يا عمري", emoji: "🎂", color: "#ff4081", bgGradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)" },
+    { text: "امممممممممم امواححححححح", emoji: "😘", color: "#f50057", bgGradient: "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)" },
+    { text: "اي لوف يو وكدا", emoji: "💋", color: "#c2185b", bgGradient: "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)" },
+    { text: "هنجيب زين امتي بقا", emoji: "👶", color: "#ad1457", bgGradient: "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)" },
+    { text: "اموت انا في مراتي وانا بفاجئها بحبك يا بت", emoji: "💑", color: "#880e4f", bgGradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)" },
+    { text: "احلي ماما ربنا يخليكي ليا", emoji: "❤️‍🔥", color: "#d50000", bgGradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)" }
   ];
 
-  const handleHeartClick = (index) => {
-    if (!openedHearts.includes(index)) {
-      setOpenedHearts([...openedHearts, index]);
-      setShowHeartMessage(index);
+  const handleHeartClick = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setShowMessage(true);
+    
+    setTimeout(() => {
+      setShowMessage(false);
       setTimeout(() => {
-        setShowHeartMessage(null);
-      }, 3000);
-    }
+        if (currentHeartIndex < 9) {
+          setCurrentHeartIndex(prev => prev + 1);
+        } else {
+          navigate('/treasure');
+        }
+        setIsAnimating(false);
+      }, 500);
+    }, 3500);
   };
 
-  useEffect(() => {
-    if (openedHearts.length === 10) {
-      setTimeout(() => {
-        navigate('/treasure');
-      }, 2000);
-    }
-  }, [openedHearts, navigate]);
+  const currentMessage = heartMessages[currentHeartIndex];
 
   return (
-    <div className="stage stage-2">
-      <div className="vortex-transition"></div>
-      <div className="hearts-section">
-        <h2 className="section-title romantic-title">دوسي علي القلوب يا حياتي 💕</h2>
-        <div className="hearts-romantic-grid">
-          {heartMessages.map((msg, index) => (
-            <div
-              key={index}
-              className={`romantic-heart-container ${openedHearts.includes(index) ? 'opened' : ''}`}
-              onClick={() => handleHeartClick(index)}
-              style={{
-                animationDelay: `${index * 0.15}s`
-              }}
+    <div className="stage stage-2-new" style={{ background: currentMessage.bgGradient }}>
+      {/* خلفية القلوب المتطايرة */}
+      <div className="floating-hearts-bg-new">
+        {[...Array(20)].map((_, i) => (
+          <div 
+            key={i} 
+            className="floating-heart-new"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${6 + Math.random() * 4}s`,
+              fontSize: `${15 + Math.random() * 20}px`
+            }}
+          >
+            {['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)]}
+          </div>
+        ))}
+      </div>
+
+      <div className="hearts-stage-container">
+        {/* عداد القلوب */}
+        <div className="hearts-progress">
+          {heartMessages.map((_, index) => (
+            <div 
+              key={index} 
+              className={`progress-heart ${index < currentHeartIndex ? 'completed' : ''} ${index === currentHeartIndex ? 'current' : ''}`}
             >
-              <div className="romantic-heart" style={{ '--heart-color': msg.color }}>
-                <div className="heart-sparkles">✨</div>
-                <div className="heart-icon-romantic">💖</div>
-                <div className="heart-glow"></div>
-              </div>
-              {showHeartMessage === index && (
-                <div className="romantic-message-popup" style={{ borderColor: msg.color }}>
-                  <div className="message-content">
-                    <p className="message-text">{msg.text}</p>
-                    <p className="message-emoji">{msg.emoji}</p>
-                  </div>
-                  <div className="message-hearts">
-                    <span>💕</span>
-                    <span>💖</span>
-                    <span>💕</span>
-                  </div>
-                </div>
-              )}
+              {index < currentHeartIndex ? '💕' : index === currentHeartIndex ? '💖' : '🤍'}
             </div>
           ))}
         </div>
-        {/* تم إخفاء عداد القلوب */}
+
+        {/* القلب الرئيسي */}
+        <div 
+          className={`main-heart-container ${showMessage ? 'showing-message' : ''} ${isAnimating ? 'animating' : ''}`}
+          onClick={handleHeartClick}
+        >
+          <div className="heart-glow-effect"></div>
+          <div className="main-heart-emoji">
+            {showMessage ? currentMessage.emoji : '💖'}
+          </div>
+          <div className="heart-sparkle-effects">
+            <span className="sparkle s1">✨</span>
+            <span className="sparkle s2">💫</span>
+            <span className="sparkle s3">⭐</span>
+            <span className="sparkle s4">✨</span>
+          </div>
+        </div>
+
+        {/* رسالة القلب */}
+        {showMessage && (
+          <div className="heart-message-display">
+            <div className="message-card-new" style={{ borderColor: currentMessage.color }}>
+              <div className="message-emoji-large">{currentMessage.emoji}</div>
+              <p className="message-text-new">{currentMessage.text}</p>
+              <div className="message-decorations">
+                <span>💕</span>
+                <span>💖</span>
+                <span>💕</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* رسالة التعليمات */}
+        {!showMessage && (
+          <p className="hearts-instruction">دوسي علي القلب يا عمري 💕</p>
+        )}
       </div>
     </div>
   );
@@ -220,8 +258,8 @@ function TreasurePage() {
       <div className="treasure-section">
         {!showMessage && nestingLevel === 0 && (
           <div className="treasure-chest" onClick={handleNestedHeartClick}>
-            <div className="chest-icon">💎</div>
-            <p className="instruction treasure-instruction">افتحي الكنز يا حياتي 💎✨</p>
+            <div className="chest-icon">💍</div>
+            <p className="instruction treasure-instruction">دوسي علي خاتم جوازنا يا عمري 💍✨</p>
           </div>
         )}
 
@@ -241,15 +279,12 @@ function TreasurePage() {
         {showMessage && (
           <div className="message-overlay fade-in">
             <div className="special-card">
-              <div className="card-header">💖 اممم رسالة ليكي يا بنوتي 💖</div>
+              <div className="card-header">💖 رسالة ليكي يا عمري 💖</div>
               <div className="card-body">
                 <p className="special-text">
                   امممممممممم انتي فاكره الموقع خلص كدا اكيد لا بقولق دي مفاجئه يا بت يعني حاجه اسبيشال زي موعدتك امممممم كل سنه وانتي طيبه للمره التانيه يا قمري انا بحبك اوي بجد ومقدرش استغني ولا ابعد عنك يارب ميحرمنيش منك ابدا يا احلي ماما في الدنيا واحلي نسومتي في الدنيا واحلي كل حاجه في الدنيا يا عشقي وعقلي وقلبي يا احن واحلي ماما في الدنيا يالي مهما اتخنقما هتفضلي ماما وحياتي وعمري وقلبي وعقلي امواححححححح بدمنك يا ماما❤️✨
                 </p>
               </div>
-              {showHeartPrompt && (
-                <p className="heart-prompt">دوسي علي القلوب يا عمري 💕</p>
-              )}
               <button className="read-button" onClick={handleReadNested}>
                 قريت خلاص 💕
               </button>
@@ -306,6 +341,7 @@ function RedHeartsPage() {
 // مكون لصفحة معرض الصور مع موسيقى عيد الميلاد
 function PhotosPage() {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [showButton, setShowButton] = useState(false);
   const audioRef = useRef(null);
   const [audioStarted, setAudioStarted] = useState(false);
   const navigate = useNavigate();
@@ -321,7 +357,66 @@ function PhotosPage() {
     "https://i.postimg.cc/vBVkcZ40/file.jpg",
     "https://i.postimg.cc/LX1wn8Jw/file.jpg",
     "https://i.postimg.cc/6qxSRxZ0/file.jpg",
-    "https://i.postimg.cc/kGPZ8PST/file.jpg"
+    "https://i.postimg.cc/kGPZ8PST/file.jpg",
+    "https://i.postimg.cc/zf3L9VBk/file.jpg",
+    "https://i.postimg.cc/cJ6KVrHX/file.jpg",
+    "https://i.postimg.cc/q7gt9zRF/file.jpg",
+    "https://i.postimg.cc/7LcCDwGK/file.jpg",
+    "https://i.postimg.cc/DzDWFnJY/file.jpg",
+    "https://i.postimg.cc/9fS4VCwW/file.jpg",
+    "https://i.postimg.cc/25JqmrLk/file.jpg",
+    "https://i.postimg.cc/CKtZYSnM/file.jpg",
+    "https://i.postimg.cc/QMPBshKM/file.jpg",
+    "https://i.postimg.cc/wM53hNfY/file.jpg",
+    "https://i.postimg.cc/QCgVp74s/file.jpg",
+    "https://i.postimg.cc/8cdshvKT/file.jpg",
+    "https://i.postimg.cc/7h1bgzsw/file.jpg",
+    "https://i.postimg.cc/T1jhrb7R/file.jpg",
+    "https://i.postimg.cc/hv8h9my4/file.jpg",
+    "https://i.postimg.cc/tJd7h6S4/file.jpg",
+    "https://i.postimg.cc/5y5jwz7j/file.jpg",
+    "https://i.postimg.cc/mk3hQ9XP/file.jpg",
+    "https://i.postimg.cc/Y0Nj1Fn4/file.jpg",
+    "https://i.postimg.cc/C5Cdj8Pf/file.jpg",
+    "https://i.postimg.cc/G3vBw0cx/file.jpg",
+    "https://i.postimg.cc/T2nyM8R9/file.jpg",
+    "https://i.postimg.cc/dQG7PMq4/file.jpg",
+    "https://i.postimg.cc/CMbZTyFv/file.jpg",
+    "https://i.postimg.cc/XN9ZSMV1/file.jpg",
+    "https://i.postimg.cc/fWY3n4w1/file.jpg",
+    "https://i.postimg.cc/v851FRQp/file.jpg",
+    "https://i.postimg.cc/Wp0DLRNL/file.jpg",
+    "https://i.postimg.cc/pVK9bNW2/file.jpg",
+    "https://i.postimg.cc/kMWV3rJm/file.jpg",
+    "https://i.postimg.cc/BQsjJhbW/file.jpg",
+    "https://i.postimg.cc/Ghr4bMt1/file.jpg",
+    "https://i.postimg.cc/15P8yWXQ/file.jpg",
+    "https://i.postimg.cc/Ghr4bMt3/file.jpg",
+    "https://i.postimg.cc/PrhCd6JN/file.jpg",
+    "https://i.postimg.cc/NfYKQNFy/file.jpg",
+    "https://i.postimg.cc/8PD7Tycf/file.jpg",
+    "https://i.postimg.cc/PrhCd6Jw/file.jpg",
+    "https://i.postimg.cc/dtvhJW3G/file.jpg",
+    "https://i.postimg.cc/sDyM3nx9/file.jpg",
+    "https://i.postimg.cc/PrhCd6JW/file.jpg",
+    "https://i.postimg.cc/yYPkxF3g/file.jpg",
+    "https://i.postimg.cc/kXcBGxR8/file.jpg",
+    "https://i.postimg.cc/Nf45F12m/file.jpg",
+    "https://i.postimg.cc/kXcBGxRF/file.jpg",
+    "https://i.postimg.cc/jdXL2znh/file.jpg",
+    "https://i.postimg.cc/MKDvHyfD/file.jpg",
+    "https://i.postimg.cc/ZKcCnrvH/file.jpg",
+    "https://i.postimg.cc/tC5YJhnM/file.jpg",
+    "https://i.postimg.cc/TY9p1r5s/file.jpg",
+    "https://i.postimg.cc/nckCrv9N/file.jpg",
+    "https://i.postimg.cc/3JBdNg0P/file.jpg",
+    "https://i.postimg.cc/jSSC7LyZ/file.jpg",
+    "https://i.postimg.cc/rwwzrK5f/file.jpg",
+    "https://i.postimg.cc/wjj3m7Db/file.jpg",
+    "https://i.postimg.cc/Z550dC6g/file.jpg",
+    "https://i.postimg.cc/BnntKX2R/file.jpg",
+    "https://i.postimg.cc/K884MRtd/file.jpg",
+    "https://i.postimg.cc/T33hDpnz/file.jpg"
   ];
 
   // تشغيل الموسيقى عند تحميل الصفحة
@@ -363,6 +458,11 @@ function PhotosPage() {
         setCurrentPhotoIndex(currentPhotoIndex + 1);
       }, 3000);
       return () => clearTimeout(timer);
+    } else {
+      // عرض الزر بعد انتهاء الصور
+      setTimeout(() => {
+        setShowButton(true);
+      }, 2000);
     }
   }, [currentPhotoIndex, photos.length]);
 
@@ -376,6 +476,25 @@ function PhotosPage() {
 
   return (
     <div className="stage stage-5">
+      {/* الثلوج الوردية والحمراء */}
+      <div className="romantic-snow">
+        {[...Array(40)].map((_, i) => (
+          <div 
+            key={i} 
+            className="snowflake"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 5}s`,
+              opacity: 0.6 + Math.random() * 0.4,
+              fontSize: `${8 + Math.random() * 12}px`
+            }}
+          >
+            {['❄️', '💕', '✨', '💗', '❤️', '💖'][Math.floor(Math.random() * 6)]}
+          </div>
+        ))}
+      </div>
+
       {/* عنصر الصوت */}
       <audio 
         ref={audioRef} 
@@ -385,6 +504,12 @@ function PhotosPage() {
       />
       
       <div className="photo-gallery">
+        {/* رسالة تنويهية */}
+        <div className="photo-notice">
+          <p>متقفليش الموقع يا عمري لسه الموقع مخلصش 💕</p>
+          <p>اسمعي الاغنيه واتفرجي عالصور وبعد حبة هيظهرلك زرار تدوسي عليه بعد ما الصور تخلص ✨</p>
+        </div>
+
         <div className="cinema-frame">
           {photos.slice(0, currentPhotoIndex + 1).map((photo, index) => (
             <img
@@ -399,7 +524,7 @@ function PhotosPage() {
           ))}
         </div>
         {/* تم إخفاء عداد الصور */}
-        {currentPhotoIndex === photos.length - 1 && (
+        {showButton && (
           <button className="continue-button fade-in" onClick={handlePhotosComplete}>
             دوسي هنا لسه في كمان 💕
           </button>
@@ -409,7 +534,7 @@ function PhotosPage() {
   );
 }
 
-// مكون لصفحة القلب النهائي
+// مكون لصفحة القلب النهائي - تصميم رومانسي جديد
 function FinalPage() {
   const navigate = useNavigate();
 
@@ -418,14 +543,46 @@ function FinalPage() {
   };
 
   return (
-    <div className="stage stage-6">
-      <div className="final-heart-container">
-        <div className="big-heart">
-          <p className="final-message">
-            كل سنه وانتي طيبه يا كل ما ليا امواححححححح ❤️✨
-          </p>
+    <div className="stage stage-6-new">
+      {/* خلفية القلوب المتحركة */}
+      <div className="floating-hearts-final">
+        {[...Array(25)].map((_, i) => (
+          <div 
+            key={i} 
+            className="floating-heart-final"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${8 + Math.random() * 4}s`,
+              fontSize: `${12 + Math.random() * 18}px`
+            }}
+          >
+            {['❤️', '💕', '💖', '💗', '💝', '✨'][Math.floor(Math.random() * 6)]}
+          </div>
+        ))}
+      </div>
+
+      <div className="final-heart-container-new">
+        {/* شكل القلب الكبير */}
+        <div className="heart-shape-container">
+          <div className="heart-shape">
+            <div className="heart-inner-glow"></div>
+            <div className="heart-content">
+              <div className="heart-emoji-top">💖</div>
+              <p className="final-message-new">
+                كل سنه وانتي طيبه يا كل ما ليا
+              </p>
+              <p className="final-message-sub">امواححححححح</p>
+              <div className="heart-decorations">
+                <span>✨</span>
+                <span>❤️</span>
+                <span>✨</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <button className="final-button" onClick={handleFinalClick}>
+        
+        <button className="final-button-new" onClick={handleFinalClick}>
           الجزء الاخير دوسي بقا 💕
         </button>
       </div>

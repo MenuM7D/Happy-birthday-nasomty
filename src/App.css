@@ -1464,3 +1464,617 @@ body {
     page-break-after: always;
   }
 }
+
+/* =============================================
+   NEW HEARTS PAGE DESIGN - تصميم جديد لصفحة القلوب
+============================================= */
+.stage-2-new {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  transition: background 0.8s ease-in-out;
+}
+
+.floating-hearts-bg-new {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-heart-new {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUpNew 8s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatUpNew {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.hearts-stage-container {
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* عداد القلوب Progress */
+.hearts-progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.progress-heart {
+  font-size: clamp(16px, 4vw, 24px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0.4;
+  filter: grayscale(0.8);
+}
+
+.progress-heart.completed {
+  opacity: 1;
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
+
+.progress-heart.current {
+  opacity: 1;
+  filter: grayscale(0);
+  animation: currentHeartPulse 1s ease-in-out infinite;
+  transform: scale(1.3);
+}
+
+@keyframes currentHeartPulse {
+  0%, 100% { transform: scale(1.3); }
+  50% { transform: scale(1.5); }
+}
+
+/* القلب الرئيسي */
+.main-heart-container {
+  position: relative;
+  width: clamp(200px, 50vw, 300px);
+  height: clamp(200px, 50vw, 300px);
+  margin: 0 auto 40px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.main-heart-container:hover {
+  transform: scale(1.1);
+}
+
+.main-heart-container.animating {
+  pointer-events: none;
+}
+
+.heart-glow-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 107, 138, 0.5) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: heartGlowNew 2s ease-in-out infinite;
+}
+
+@keyframes heartGlowNew {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+.main-heart-emoji {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(100px, 25vw, 160px);
+  animation: mainHeartBeat 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 10px 30px rgba(255, 107, 138, 0.5));
+  z-index: 2;
+}
+
+@keyframes mainHeartBeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.1); }
+  60% { transform: scale(1); }
+}
+
+.main-heart-container.showing-message .main-heart-emoji {
+  animation: heartExplode 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes heartExplode {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(0.8); opacity: 0.8; }
+}
+
+/* تأثيرات اللمعان */
+.heart-sparkle-effects {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: clamp(16px, 4vw, 24px);
+  animation: sparkleFloat 2s ease-in-out infinite;
+}
+
+.sparkle.s1 { top: 10%; left: 15%; animation-delay: 0s; }
+.sparkle.s2 { top: 15%; right: 15%; animation-delay: 0.5s; }
+.sparkle.s3 { bottom: 20%; left: 10%; animation-delay: 1s; }
+.sparkle.s4 { bottom: 15%; right: 10%; animation-delay: 1.5s; }
+
+@keyframes sparkleFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+}
+
+/* رسالة القلب */
+.heart-message-display {
+  animation: messageAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes messageAppear {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.8); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.message-card-new {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.95) 100%);
+  padding: clamp(25px, 5vw, 40px);
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  border: 3px solid;
+  max-width: 400px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+}
+
+.message-emoji-large {
+  font-size: clamp(50px, 12vw, 80px);
+  margin-bottom: 15px;
+  animation: emojiPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes emojiPop {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.message-text-new {
+  font-size: clamp(20px, 5vw, 28px);
+  color: #880e4f;
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.message-decorations {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: clamp(20px, 4vw, 28px);
+  animation: decorationsWave 1.5s ease-in-out infinite;
+}
+
+@keyframes decorationsWave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* رسالة التعليمات */
+.hearts-instruction {
+  color: white;
+  font-size: clamp(20px, 5vw, 28px);
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  animation: instructionFade 2s ease-in-out infinite;
+}
+
+@keyframes instructionFade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* =============================================
+   ENVELOPE HEART DESIGN - تصميم الظرف بالقلب
+============================================= */
+.envelope-heart {
+  position: absolute;
+  font-size: clamp(30px, 8vw, 50px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: envelopeHeartBeat 1.5s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes envelopeHeartBeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* =============================================
+   ROMANTIC SNOW EFFECT - تأثير الثلوج الرومانسية
+============================================= */
+.romantic-snow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snowflake {
+  position: absolute;
+  top: -20px;
+  animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* =============================================
+   PHOTO NOTICE - رسالة تنويهية في الصور
+============================================= */
+.photo-notice {
+  background: linear-gradient(135deg, rgba(232, 180, 184, 0.9) 0%, rgba(199, 122, 136, 0.9) 100%);
+  padding: clamp(15px, 3vw, 25px);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: noticePulse 3s ease-in-out infinite;
+}
+
+.photo-notice p {
+  color: white;
+  font-size: clamp(14px, 3.5vw, 18px);
+  margin: 8px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.photo-notice p:first-child {
+  font-weight: 700;
+  font-size: clamp(16px, 4vw, 20px);
+}
+
+@keyframes noticePulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(232, 180, 184, 0.4);
+  }
+}
+
+/* =============================================
+   FINAL PAGE NEW DESIGN - تصميم جديد للصفحة النهائية
+============================================= */
+.stage-6-new {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  background: linear-gradient(160deg, 
+    #1a0f14 0%, 
+    #2d1f2f 25%,
+    #4a2c3a 50%,
+    #6b3d50 75%,
+    #8b4d60 100%);
+}
+
+.floating-hearts-final {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-heart-final {
+  position: absolute;
+  bottom: -30px;
+  animation: floatUpFinal 10s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes floatUpFinal {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.final-heart-container-new {
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* شكل القلب */
+.heart-shape-container {
+  margin-bottom: 40px;
+}
+
+.heart-shape {
+  position: relative;
+  width: clamp(280px, 70vw, 400px);
+  height: clamp(260px, 65vw, 370px);
+  margin: 0 auto;
+  background: linear-gradient(135deg, 
+    #ff6b8a 0%, 
+    #ff8ba7 25%,
+    #ffa5b9 50%,
+    #ffb8c9 75%,
+    #ffd0db 100%);
+  transform: rotate(-45deg);
+  border-radius: 50px 50px 0 50px;
+  box-shadow: 
+    0 20px 60px rgba(255, 107, 138, 0.5),
+    inset 0 -10px 40px rgba(255, 255, 255, 0.2),
+    inset 0 10px 40px rgba(139, 77, 96, 0.2);
+  animation: heartShapePulse 2s ease-in-out infinite;
+}
+
+.heart-shape::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  box-shadow: inherit;
+  transform: rotate(90deg);
+  top: -50%;
+  left: 50%;
+}
+
+@keyframes heartShapePulse {
+  0%, 100% { 
+    transform: rotate(-45deg) scale(1);
+    box-shadow: 
+      0 20px 60px rgba(255, 107, 138, 0.5),
+      inset 0 -10px 40px rgba(255, 255, 255, 0.2),
+      inset 0 10px 40px rgba(139, 77, 96, 0.2);
+  }
+  50% { 
+    transform: rotate(-45deg) scale(1.05);
+    box-shadow: 
+      0 30px 80px rgba(255, 107, 138, 0.7),
+      inset 0 -10px 40px rgba(255, 255, 255, 0.3),
+      inset 0 10px 40px rgba(139, 77, 96, 0.1);
+  }
+}
+
+.heart-inner-glow {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 30%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: innerGlow 3s ease-in-out infinite;
+}
+
+@keyframes innerGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.heart-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(45deg);
+  padding: 20px;
+  z-index: 2;
+}
+
+.heart-emoji-top {
+  font-size: clamp(40px, 10vw, 60px);
+  margin-bottom: 10px;
+  animation: emojiTopFloat 2s ease-in-out infinite;
+}
+
+@keyframes emojiTopFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.final-message-new {
+  font-size: clamp(18px, 4.5vw, 26px);
+  color: #4a2c3a;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.5;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+  margin-bottom: 5px;
+}
+
+.final-message-sub {
+  font-size: clamp(16px, 4vw, 22px);
+  color: #6b3d50;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.heart-decorations {
+  display: flex;
+  gap: 10px;
+  font-size: clamp(18px, 4vw, 26px);
+  animation: decorFloat 2s ease-in-out infinite;
+}
+
+@keyframes decorFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.final-button-new {
+  background: linear-gradient(135deg, #ff6b8a 0%, #ff8ba7 50%, #ffa5b9 100%);
+  color: white;
+  border: none;
+  padding: clamp(16px, 4vw, 22px) clamp(40px, 8vw, 60px);
+  font-size: clamp(18px, 4vw, 24px);
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 
+    0 10px 40px rgba(255, 107, 138, 0.5),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-button-new::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.final-button-new:hover::before {
+  left: 100%;
+}
+
+.final-button-new:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 20px 60px rgba(255, 107, 138, 0.7),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* =============================================
+   RESPONSIVE FOR NEW DESIGNS
+============================================= */
+@media (max-width: 480px) {
+  .hearts-progress {
+    gap: 5px;
+    margin-bottom: 25px;
+  }
+  
+  .progress-heart {
+    font-size: clamp(14px, 3.5vw, 18px);
+  }
+  
+  .main-heart-container {
+    width: clamp(180px, 45vw, 250px);
+    height: clamp(180px, 45vw, 250px);
+    margin-bottom: 30px;
+  }
+  
+  .message-card-new {
+    padding: clamp(20px, 4vw, 30px);
+    border-radius: 25px;
+  }
+  
+  .photo-notice {
+    padding: clamp(12px, 2.5vw, 20px);
+    border-radius: 15px;
+  }
+  
+  .photo-notice p {
+    font-size: clamp(12px, 3vw, 15px);
+    margin: 5px 0;
+  }
+  
+  .heart-shape {
+    width: clamp(240px, 65vw, 320px);
+    height: clamp(220px, 60vw, 300px);
+  }
+  
+  .final-message-new {
+    font-size: clamp(15px, 4vw, 20px);
+  }
+  
+  .final-button-new {
+    padding: clamp(14px, 3.5vw, 18px) clamp(30px, 6vw, 45px);
+    font-size: clamp(16px, 3.5vw, 20px);
+  }
+}
