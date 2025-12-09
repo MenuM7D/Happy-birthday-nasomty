@@ -1,0 +1,16 @@
+{
+  "short_name": "Birthday Nasomty 💕",
+  "name": "HAPPY BIRTHDAY NASOMTY ❤️✨",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#f5576c",
+  "background_color": "#ffffff",
+  "description": "كل سنه وانتي طيبه يا نسومتي 💕 مفاجأة عيد ميلاد رومانسية مليئة بالحب والعشق والدلع ✨"
+}
