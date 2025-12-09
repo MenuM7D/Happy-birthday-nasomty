@@ -727,7 +727,7 @@ function InfinitePage() {
             <div className="voice-player">
               <audio 
                 ref={audioRef}
-                src="https://files.catbox.moe/aumdtw.opus"
+                src="https://files.catbox.moe/zix73i.opus"
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
                 onEnded={handleEnded}
